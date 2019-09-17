@@ -45,17 +45,48 @@ class MainGame extends React.Component {
             id: 9
         }]
     }
-    imageRearrange = (imgId) => {
+    imageRearrange = (event) => {
+        let imgId = event.target.name
         console.log(imgId);
-        let newArr = this.shuffle(this.state.imgArr)
+
+        let newArr = this.state.imgArr.map((image) =>
+
+           {
+               if(image.id === parseInt(imgId)){
+                   return this.checkStatus(image)
+               }
+               else{
+                   return image
+               }
+               
+            
+            }
+
+
+            
+        );
+        console.log(newArr)
+        let shuffledArr = this.shuffle(newArr);
 
         this.setState({
-            imgArr: newArr
-
-        });
-
-
+            imgArr: shuffledArr
+        }, console.log(this.state.imgArr));
+        
     }
+    checkStatus = (image)=>{
+        let newStatus = {
+            id : image.id,
+            path : image.path,
+            beenClicked : true
+        }
+        if(image.beenClicked === true){
+            alert("This Image has been clicked already")
+
+        }
+        return newStatus
+        
+    }
+
     shuffle = (a) => {
         for (let i = a.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -71,13 +102,13 @@ class MainGame extends React.Component {
                     <div className="container">
                         <div className="row">
                             {this.state.imgArr.map(img => {
-                                {
-                                    return <div className="col-md-3 gameImages">
-                                        <img src={img.path} alt="One" id={img.id} height="200px" onClick={() => this.imageRearrange(img.id)}>
 
-                                        </img>
-                                    </div>
-                                }
+                                return <div className="col-md-4 gameImages">
+                                    <img src={img.path} alt="One" id={img.id} name={img.id} height="200px" onClick={this.imageRearrange}>
+
+                                    </img>
+                                </div>
+
                             })
                             }
 
