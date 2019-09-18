@@ -3,6 +3,7 @@ import ScoreBoard from "./scoreBoorad"
 
 class MainGame extends React.Component {
     state = {
+        score : 0 ,
         imgArr: [{
             path: "./clickyImg1.png",
             beenClicked: false,
@@ -80,8 +81,12 @@ class MainGame extends React.Component {
             beenClicked : true
         }
         if(image.beenClicked === true){
+            this.state.score--
             alert("This Image has been clicked already")
 
+        }
+        else if (image.beenClicked === false){
+            this.state.score++
         }
         return newStatus
         
@@ -116,7 +121,7 @@ class MainGame extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-4 scoreBoard">
-                    <ScoreBoard />
+                    <ScoreBoard score={this.state.score} />
                 </div>
             </div>
         </div>

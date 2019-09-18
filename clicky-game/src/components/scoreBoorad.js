@@ -1,11 +1,11 @@
 import React from "react";
 
-function ScoreBoard() {
+function ScoreBoard(props) {
     return (
     <div className="jumbotron jumbotron-fluid">
         <div className="container">
             <h1 className="display-4">Your Score:</h1>
-            <p classname="lead"></p>
+            <h3 classname="lead">{props.score}</h3>
         </div>
     </div>)
 }
