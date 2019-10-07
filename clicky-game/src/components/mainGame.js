@@ -81,7 +81,11 @@ class MainGame extends React.Component {
             beenClicked : true
         }
         if(image.beenClicked === true){
-            this.state.score--
+            let newValue = this.state.score--
+            this.setState({
+                score: newValue
+            })
+            
             alert("This Image has been clicked already")
 
         }
